@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.API", "StarWarsAPI.API\StarWarsAPI.API.csproj", "{83A61815-5679-4807-B1C6-C8ED600EA7DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.API", "src\StarWarsAPI.API\StarWarsAPI.API.csproj", "{83A61815-5679-4807-B1C6-C8ED600EA7DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Application", "StarWarsAPI.Application\StarWarsAPI.Application.csproj", "{335379E7-1118-43E2-9C40-661E3FDC8185}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Application", "src\StarWarsAPI.Application\StarWarsAPI.Application.csproj", "{335379E7-1118-43E2-9C40-661E3FDC8185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Domain", "StarWarsAPI.Domain\StarWarsAPI.Domain.csproj", "{A1E3BC58-7AE8-44BA-B1EB-CD867F6F3F56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Domain", "src\StarWarsAPI.Domain\StarWarsAPI.Domain.csproj", "{A1E3BC58-7AE8-44BA-B1EB-CD867F6F3F56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Infrastructure", "StarWarsAPI.Infrastructure\StarWarsAPI.Infrastructure.csproj", "{8F1DB44E-DEEE-43BD-B822-FF5B62B90CF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Infrastructure", "src\StarWarsAPI.Infrastructure\StarWarsAPI.Infrastructure.csproj", "{8F1DB44E-DEEE-43BD-B822-FF5B62B90CF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Tests", "StarWarsAPI.Tests\StarWarsAPI.Tests.csproj", "{3EB10A6D-6217-4814-A497-2A00D7B3BF13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsAPI.Tests", "tests\StarWarsAPI.Tests\StarWarsAPI.Tests.csproj", "{3EB10A6D-6217-4814-A497-2A00D7B3BF13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
