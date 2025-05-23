@@ -10,6 +10,7 @@ COPY src/StarWarsAPI.API/*.csproj ./src/StarWarsAPI.API/
 COPY src/StarWarsAPI.Application/*.csproj ./src/StarWarsAPI.Application/
 COPY src/StarWarsAPI.Domain/*.csproj ./src/StarWarsAPI.Domain/
 COPY src/StarWarsAPI.Infrastructure/*.csproj ./src/StarWarsAPI.Infrastructure/
+COPY tests/StarWarsAPI.Tests/*.csproj ./tests/StarWarsAPI.Tests/
 
 # Restaurar dependencias
 RUN dotnet restore
