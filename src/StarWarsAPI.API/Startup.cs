@@ -26,6 +26,17 @@ namespace StarWarsAPI.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // Add Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "StarWars API",
+                    Version = "v1",
+                    Description = "API de gestión de películas de Star Wars"
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +48,14 @@ namespace StarWarsAPI.API
             }
 
             app.UseHttpsRedirection();
+
+            // Swagger config
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarWars API v1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
