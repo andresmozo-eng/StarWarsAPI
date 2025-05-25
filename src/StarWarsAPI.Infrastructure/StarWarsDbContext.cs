@@ -17,6 +17,11 @@ namespace StarWarsAPI.Infrastructure
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = 1, Description = "User" },
+                new Role { Id = 2, Description = "Admin" }
+            );
         }
 
     }

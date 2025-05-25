@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StarWarsAPI.API.Middlewares;
 using StarWarsAPI.API.Validators;
 using StarWarsAPI.Application.Helpers;
 using StarWarsAPI.Application.Interfaces.IRepositories;
 using StarWarsAPI.Application.Interfaces.IServices;
 using StarWarsAPI.Application.Services;
+using StarWarsAPI.Application.Settings;
 using StarWarsAPI.Infrastructure;
 using StarWarsAPI.Infrastructure.Repositories;
 using System;
@@ -37,6 +39,9 @@ namespace StarWarsAPI.API
 
             services.AddDbContext<StarWarsDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            //Inyeccion de configuracion JWT
+            services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
 
             // Inyección repositorios
             services.AddScoped<IUserRepository, UserRepository>();
@@ -69,6 +74,8 @@ namespace StarWarsAPI.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

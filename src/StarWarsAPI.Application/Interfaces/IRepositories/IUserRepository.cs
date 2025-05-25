@@ -7,6 +7,7 @@ namespace StarWarsAPI.Application.Interfaces.IRepositories
     {
         Task AddAsync(User user);
         Task<bool> ExistsAsync(string email);
+        Task<User> GetByEmailAsync(string email);
         Task SaveChangesAsync();
     }
 }

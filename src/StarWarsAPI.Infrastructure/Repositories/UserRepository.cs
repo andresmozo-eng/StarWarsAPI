@@ -28,5 +28,13 @@ namespace StarWarsAPI.Infrastructure.Repositories
         {
             return await _context.Users.AnyAsync(u => u.Email == email);
         }
+
+        public async Task<User> GetByEmailAsync(string email)
+        {
+            return await _context
+                        .Users
+                        .Include(u=> u.Role)
+                        .FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

@@ -7,15 +7,14 @@ namespace StarWarsAPI.Domain.Entities
 {
     public class User
     {
-        
-
-        public User(string userName, string email, byte[] passwordHash, byte[] passwordSalt)
+        public User(string userName, string email, byte[] passwordHash, byte[] passwordSalt, int roleId)
         {
             Id = Guid.NewGuid();
             UserName = userName;
             Email = email;
             PasswordHash = passwordHash;
             PasswordSalt = passwordSalt;
+            RoleId = roleId;
         }
         private User() { }// Constructor necesario para EF
 
@@ -24,6 +23,8 @@ namespace StarWarsAPI.Domain.Entities
         public string Email { get; private set; }
         public byte[] PasswordHash { get; private set; }
         public byte[] PasswordSalt { get; private set; }
+        public int RoleId { get; set; }
+        public Role Role { get; set; }
 
         public void SetPassword(string password)
         {

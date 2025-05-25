@@ -9,6 +9,7 @@ namespace StarWarsAPI.API.Mapping
         public RequestToDtoProfile()
         {
             CreateMap<RegisterUserRequest, RegisterUserDto>();
+            CreateMap<LoginUserRequest, LoginUserDto>();
         }
     }
 }

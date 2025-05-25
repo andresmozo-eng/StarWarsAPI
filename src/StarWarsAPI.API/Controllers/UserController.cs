@@ -32,5 +32,19 @@ namespace StarWarsAPI.API.Controllers
             await _userService.RegisterUserAsync(_mapper.Map<RegisterUserDto>(request));
             return Ok(new { Message = "Usuario registrado con éxito" });
         }
+
+        /// <summary>
+        /// Inicia sesión un usuario existente.
+        /// </summary>
+        /// <param name="request">Credenciales del usuario.</param>
+        /// <returns>Token JWT si las credenciales son válidas.</returns>
+        /// <response code="200">Inicio de sesión exitoso, devuelve el token.</response>
+        /// <response code="400">Credenciales inválidas.</response>
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginUserRequest request)
+        {
+            var token = await _userService.LoginUserAsync(_mapper.Map<LoginUserDto>(request));
+            return Ok(new { Token = token });
+        }
     }
 }
