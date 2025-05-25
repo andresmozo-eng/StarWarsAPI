@@ -1,15 +1,20 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using StarWarsAPI.API.Validators;
+using StarWarsAPI.Application.Helpers;
+using StarWarsAPI.Application.Interfaces.IRepositories;
+using StarWarsAPI.Application.Interfaces.IServices;
+using StarWarsAPI.Application.Services;
+using StarWarsAPI.Infrastructure;
+using StarWarsAPI.Infrastructure.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
 
 namespace StarWarsAPI.API
 {
@@ -25,8 +30,26 @@ namespace StarWarsAPI.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<RegisterUserRequestValidator>();
+            }); ;
+
+            services.AddDbContext<StarWarsDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Inyección repositorios
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            //Inyeccion servicios
+            services.AddScoped<IPasswordHasherHelper, PasswordHasherHelper>();
+            services.AddScoped<IUserService, UserService>();
+
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
+
             // Add Swagger
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -35,6 +58,10 @@ namespace StarWarsAPI.API
                     Version = "v1",
                     Description = "API de gestión de películas de Star Wars"
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
         }
@@ -56,6 +83,8 @@ namespace StarWarsAPI.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarWars API v1");
                 c.RoutePrefix = string.Empty;
             });
+
+
 
             app.UseRouting();
 
