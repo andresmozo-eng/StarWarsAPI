@@ -8,5 +8,7 @@ namespace StarWarsAPI.Application.Interfaces.IServices
     {
         Task SyncMoviesAsync();
         Task<IEnumerable<MovieResponseDto>> GetAllMoviesAsync();
+        Task<MovieResponseDto> GetMovieByIdAsync(int id);
+
     }
 }

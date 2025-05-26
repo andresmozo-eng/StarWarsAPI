@@ -10,6 +10,7 @@ namespace StarWarsAPI.Application.Interfaces.IRepositories
         Task AddRangeAsync(IEnumerable<Movie> movies);
         Task SaveChangesAsync();
         Task<IEnumerable<Movie>> GetAllAsync();
+        Task<Movie> GetByIdAsync(int id);
 
     }
 }

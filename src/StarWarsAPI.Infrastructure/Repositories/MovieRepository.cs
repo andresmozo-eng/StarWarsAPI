@@ -39,5 +39,11 @@ namespace StarWarsAPI.Infrastructure.Repositories
             return await _context.Movies.AsNoTracking().ToListAsync();
         }
 
+        public async Task<Movie> GetByIdAsync(int id)
+        {
+            return await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+
     }
 }

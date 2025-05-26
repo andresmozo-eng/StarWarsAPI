@@ -68,5 +68,15 @@ namespace StarWarsAPI.Application.Services
             return _mapper.Map<List<MovieResponseDto>>(movies);
         }
 
+        public async Task<MovieResponseDto> GetMovieByIdAsync(int id)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+            if (movie == null)
+                return null;
+
+            return _mapper.Map<MovieResponseDto>(movie);
+        }
+
+
     }
 }
