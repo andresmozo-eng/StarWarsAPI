@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarWarsAPI.Domain.Entities;
 using StarWarsAPI.Infrastructure.Configurations;
+using System;
 
 namespace StarWarsAPI.Infrastructure
 {
@@ -11,10 +12,11 @@ namespace StarWarsAPI.Infrastructure
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(StarWarsDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);
 

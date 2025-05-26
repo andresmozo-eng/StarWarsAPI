@@ -4,11 +4,12 @@ using StarWarsAPI.Domain.Entities;
 
 namespace StarWarsAPI.Application.Mapping
 {
-    public class DtoToEntityProfile : Profile
+    public class ApplicationMappings : Profile
     {
-        public DtoToEntityProfile()
+        public ApplicationMappings()
         {
             CreateMap<RegisterUserDto, User>();
+            CreateMap<Movie, MovieResponseDto>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StarWarsAPI.Infrastructure;
@@ -9,9 +10,10 @@ using StarWarsAPI.Infrastructure;
 namespace StarWarsAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(StarWarsDbContext))]
-    partial class StarWarsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525221901_AddMovie")]
+    partial class AddMovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
