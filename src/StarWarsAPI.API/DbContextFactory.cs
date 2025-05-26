@@ -10,14 +10,13 @@ namespace StarWarsAPI.API
     {
         public StarWarsDbContext CreateDbContext(string[] args)
         {
-            // Construye la configuración para obtener la cadena de conexión
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json") 
                 .Build();
 
             var builder = new DbContextOptionsBuilder<StarWarsDbContext>();
-            var connectionString = configuration.GetConnectionString("DefaultConnection"); // O el nombre de tu ConnectionString
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             builder.UseNpgsql(connectionString); 
 

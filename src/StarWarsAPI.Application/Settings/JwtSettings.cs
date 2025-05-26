@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StarWarsAPI.Application.Settings
+﻿namespace StarWarsAPI.Application.Settings
 {
     public class JwtSettings
     {

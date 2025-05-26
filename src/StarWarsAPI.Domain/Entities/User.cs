@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,7 +15,7 @@ namespace StarWarsAPI.Domain.Entities
             PasswordSalt = passwordSalt;
             RoleId = roleId;
         }
-        private User() { }// Constructor necesario para EF
+        private User() { } // Constructor necesario para EF
 
         public Guid Id { get; private set; }
         public string UserName { get; private set; }

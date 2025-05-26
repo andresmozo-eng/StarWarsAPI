@@ -21,7 +21,7 @@ namespace StarWarsAPI.API.Middlewares
         {
             try
             {
-                await _next(context); // Ejecuta el siguiente middleware
+                await _next(context);
             }
             catch (Exception ex)
             {
@@ -31,10 +31,10 @@ namespace StarWarsAPI.API.Middlewares
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var code = HttpStatusCode.InternalServerError; // 500 por defecto
+            var code = HttpStatusCode.InternalServerError;
             var result = string.Empty;
 
-            if (exception is UserNotFoundException)
+            if (exception is NotFoundException)
             {
                 code = HttpStatusCode.NotFound;
             }
@@ -43,6 +43,10 @@ namespace StarWarsAPI.API.Middlewares
                 code = HttpStatusCode.Unauthorized;
             }
             else if (exception is ArgumentException)
+            {
+                code = HttpStatusCode.BadRequest;
+            }
+            else if (exception is EmailAlreadyExistsException)
             {
                 code = HttpStatusCode.BadRequest;
             }

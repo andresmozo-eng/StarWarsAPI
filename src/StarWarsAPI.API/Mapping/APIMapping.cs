@@ -4,13 +4,14 @@ using StarWarsAPI.Application.DTOs;
 
 namespace StarWarsAPI.API.Mapping
 {
-    public class RequestToDtoProfile : Profile
+    public class APIMapping : Profile
     {
-        public RequestToDtoProfile()
+        public APIMapping()
         {
             CreateMap<RegisterUserRequest, RegisterUserDto>();
             CreateMap<LoginUserRequest, LoginUserDto>();
             CreateMap<CreateMovieRequest, CreateMovieDto>();
+            CreateMap<UpdateMovieRequest, UpdateMovieDto>();
         }
     }
 }

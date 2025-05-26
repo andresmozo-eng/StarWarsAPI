@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.DTOs.Swapi;
+using StarWarsAPI.Application.Exceptions;
 using StarWarsAPI.Application.Interfaces.IRepositories;
 using StarWarsAPI.Application.Interfaces.IServices;
 using StarWarsAPI.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -77,15 +79,32 @@ namespace StarWarsAPI.Application.Services
             return _mapper.Map<MovieResponseDto>(movie);
         }
 
-        public async Task<MovieResponseDto> CreateMovieAsync(CreateMovieDto request)
+        public async Task<MovieResponseDto> CreateMovieAsync(CreateMovieDto dto)
         {
-            var movie = _mapper.Map<Movie>(request);
+            var movie = _mapper.Map<Movie>(dto);
 
             await _movieRepository.AddAsync(movie);
             await _movieRepository.SaveChangesAsync();
 
             return _mapper.Map<MovieResponseDto>(movie);
         }
+
+        public async Task UpdateMovieAsync(int id, UpdateMovieDto dto)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+            if (movie == null)
+                throw new NotFoundException("Película no encontrada");
+
+            movie.Title = dto.Title;
+            movie.EpisodeId = dto.EpisodeId;
+            movie.OpeningCrawl = dto.OpeningCrawl;
+            movie.Director = dto.Director;
+            movie.Producer = dto.Producer;
+            movie.ReleaseDate = dto.ReleaseDate;
+
+            await _movieRepository.SaveChangesAsync();
+        }
+
 
 
 

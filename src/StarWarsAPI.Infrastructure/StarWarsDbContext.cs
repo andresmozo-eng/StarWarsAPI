@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarWarsAPI.Domain.Entities;
-using StarWarsAPI.Infrastructure.Configurations;
-using System;
 
 namespace StarWarsAPI.Infrastructure
 {

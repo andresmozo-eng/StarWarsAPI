@@ -50,7 +50,7 @@ namespace StarWarsAPI.Application.Services
         {
             var user = await _userRepository.GetByEmailAsync(loginDto.Email);
             if (user == null)
-                throw new UserNotFoundException("Usuario no encontrado.");
+                throw new NotFoundException("Usuario no encontrado.");
 
             var passwordIsValid = _passwordHasher.VerifyPasswordHash(
                 loginDto.Password, user.PasswordHash, user.PasswordSalt);

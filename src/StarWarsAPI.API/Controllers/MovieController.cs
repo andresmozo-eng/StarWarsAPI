@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarWarsAPI.API.Models.Requests;
 using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.Interfaces.IServices;
-using StarWarsAPI.Application.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace StarWarsAPI.API.Controllers
@@ -47,7 +46,7 @@ namespace StarWarsAPI.API.Controllers
         /// <response code="200">Devuelve la lista de películas.</response>
         /// <response code="401">El usuario no está autenticado.</response>
         [HttpGet]
-        [Authorize] // Opcional: solo si querés que sea solo para usuarios logueados
+        [Authorize]
         public async Task<IActionResult> GetMovies()
         {
             var movies = await _movieService.GetAllMoviesAsync();
@@ -91,6 +90,19 @@ namespace StarWarsAPI.API.Controllers
             var movie = await _movieService.CreateMovieAsync(_mapper.Map<CreateMovieDto>(request));
             return Ok(movie);
         }
+
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+       // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdateMovie(int id, [FromBody] UpdateMovieRequest request)
+        {
+            await _movieService.UpdateMovieAsync(id, _mapper.Map<UpdateMovieDto>(request));
+            return NoContent();
+        }
+
 
     }
 }
