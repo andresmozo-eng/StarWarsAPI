@@ -38,8 +38,9 @@ namespace StarWarsAPI.Application.Services
             if (await _userRepository.ExistsAsync(dto.Email))
                 throw new ArgumentException("El email ya está registrado.");
 
+
             _passwordHasher.CreatePasswordHash(dto.Password, out var hash, out var salt);
-            var user = new User(dto.UserName, dto.Email, hash, salt, (int)RoleType.User); //Created as user by default
+            var user = new User(dto.UserName, dto.Email, hash, salt, (int)RoleType.Admin); //Created as user by default
 
             await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAsync();
