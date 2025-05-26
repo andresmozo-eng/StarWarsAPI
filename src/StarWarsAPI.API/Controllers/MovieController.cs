@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using StarWarsAPI.API.Models.Requests;
 using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.Interfaces.IServices;
+using System;
 using System.Threading.Tasks;
 
 namespace StarWarsAPI.API.Controllers
@@ -32,7 +33,7 @@ namespace StarWarsAPI.API.Controllers
         /// <response code="403">El usuario no tiene permisos para sincronizar.</response>
         /// <response code="500">Error interno del servidor al sincronizar las películas.</response>
         [HttpPost("sync")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SyncMovies()
         {
             await _movieService.SyncMoviesAsync();
@@ -64,7 +65,7 @@ namespace StarWarsAPI.API.Controllers
         /// <response code="401">El usuario no está autenticado.</response>
         /// <response code="403">El usuario no tiene permisos para acceder.</response>
         [HttpGet("{id}")]
-       // [Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetMovieById(int id)
         {
             var movie = await _movieService.GetMovieByIdAsync(id);
@@ -84,7 +85,7 @@ namespace StarWarsAPI.API.Controllers
         /// <response code="401">El usuario no está autenticado.</response>
         /// <response code="403">El usuario no tiene permisos para crear películas.</response>
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateMovie([FromBody] CreateMovieRequest request)
         {
             var movie = await _movieService.CreateMovieAsync(_mapper.Map<CreateMovieDto>(request));
@@ -96,10 +97,25 @@ namespace StarWarsAPI.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateMovie(int id, [FromBody] UpdateMovieRequest request)
         {
             await _movieService.UpdateMovieAsync(id, _mapper.Map<UpdateMovieDto>(request));
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Elimina una película por su ID.
+        /// </summary>
+        /// <param name="id">ID de la película a eliminar</param>
+        /// <returns>204 NoContent si se elimina correctamente</returns>
+        /// <response code="204">Película eliminada exitosamente</response>
+        /// <response code="404">Película no encontrada</response>
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            await _movieService.DeleteMovieAsync(id);
             return NoContent();
         }
 

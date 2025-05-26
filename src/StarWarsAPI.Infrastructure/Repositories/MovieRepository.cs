@@ -49,5 +49,11 @@ namespace StarWarsAPI.Infrastructure.Repositories
         {
             await _context.Movies.AddAsync(movie);
         }
+
+        public void Delete(Movie movie)
+        {
+            _context.Movies.Remove(movie);
+        }
+
     }
 }

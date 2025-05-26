@@ -13,5 +13,7 @@ namespace StarWarsAPI.Application.Interfaces.IRepositories
         Task<IEnumerable<Movie>> GetAllAsync();
         Task<Movie> GetByIdAsync(int id);
         Task AddAsync(Movie movie);
+        void Delete(Movie movie);
+
     }
 }

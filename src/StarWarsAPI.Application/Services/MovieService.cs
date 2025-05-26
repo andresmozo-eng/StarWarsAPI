@@ -105,6 +105,18 @@ namespace StarWarsAPI.Application.Services
             await _movieRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteMovieAsync(int id)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+
+            if (movie == null)
+                throw new NotFoundException($"No se encontró la película con ID {id}.");
+
+            _movieRepository.Delete(movie);
+            await _movieRepository.SaveChangesAsync();
+        }
+
+
 
 
 

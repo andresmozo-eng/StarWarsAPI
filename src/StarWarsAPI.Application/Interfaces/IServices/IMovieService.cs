@@ -12,6 +12,6 @@ namespace StarWarsAPI.Application.Interfaces.IServices
         Task<MovieResponseDto> GetMovieByIdAsync(int id);
         Task<MovieResponseDto> CreateMovieAsync(CreateMovieDto request);
         Task UpdateMovieAsync(int id, UpdateMovieDto request);
-
+        Task DeleteMovieAsync(int id);
     }
 }
