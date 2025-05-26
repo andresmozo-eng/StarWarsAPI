@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using StarWarsAPI.API.Models.Requests;
 using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.Interfaces.IServices;
-using System;
 using System.Threading.Tasks;
 
 namespace StarWarsAPI.API.Controllers
