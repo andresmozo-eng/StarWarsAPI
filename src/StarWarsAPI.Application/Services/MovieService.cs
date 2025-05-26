@@ -77,6 +77,17 @@ namespace StarWarsAPI.Application.Services
             return _mapper.Map<MovieResponseDto>(movie);
         }
 
+        public async Task<MovieResponseDto> CreateMovieAsync(CreateMovieDto request)
+        {
+            var movie = _mapper.Map<Movie>(request);
+
+            await _movieRepository.AddAsync(movie);
+            await _movieRepository.SaveChangesAsync();
+
+            return _mapper.Map<MovieResponseDto>(movie);
+        }
+
+
 
     }
 }

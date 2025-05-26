@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.Interfaces.IRepositories;
 using StarWarsAPI.Domain.Entities;
 using System;
@@ -44,6 +45,9 @@ namespace StarWarsAPI.Infrastructure.Repositories
             return await _context.Movies.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-
+        public async Task AddAsync(Movie movie)
+        {
+            await _context.Movies.AddAsync(movie);
+        }
     }
 }

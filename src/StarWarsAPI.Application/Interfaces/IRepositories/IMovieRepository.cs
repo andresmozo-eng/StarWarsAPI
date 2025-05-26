@@ -1,4 +1,5 @@
-﻿using StarWarsAPI.Domain.Entities;
+﻿using StarWarsAPI.Application.DTOs;
+using StarWarsAPI.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,6 @@ namespace StarWarsAPI.Application.Interfaces.IRepositories
         Task SaveChangesAsync();
         Task<IEnumerable<Movie>> GetAllAsync();
         Task<Movie> GetByIdAsync(int id);
-
+        Task AddAsync(Movie movie);
     }
 }

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StarWarsAPI.API.Models.Requests;
+using StarWarsAPI.Application.DTOs;
 using StarWarsAPI.Application.Interfaces.IServices;
+using StarWarsAPI.Application.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -11,10 +15,12 @@ namespace StarWarsAPI.API.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly IMovieService _movieService;
+        private readonly IMapper _mapper;
 
-        public MoviesController(IMovieService movieService)
+        public MoviesController(IMovieService movieService, IMapper mapper)
         {
             _movieService = movieService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -66,6 +72,23 @@ namespace StarWarsAPI.API.Controllers
             if (movie == null)
                 return NotFound(new { Message = $"No se encontró una película con ID {id}." });
 
+            return Ok(movie);
+        }
+
+        /// <summary>
+        /// Crea una nueva película en la base de datos.
+        /// </summary>
+        /// <param name="request">Los datos de la película a crear.</param>
+        /// <returns>La película creada.</returns>
+        /// <response code="201">Película creada exitosamente.</response>
+        /// <response code="400">Los datos proporcionados no son válidos.</response>
+        /// <response code="401">El usuario no está autenticado.</response>
+        /// <response code="403">El usuario no tiene permisos para crear películas.</response>
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CreateMovie([FromBody] CreateMovieRequest request)
+        {
+            var movie = await _movieService.CreateMovieAsync(_mapper.Map<CreateMovieDto>(request));
             return Ok(movie);
         }
 

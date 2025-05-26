@@ -10,6 +10,7 @@ namespace StarWarsAPI.Application.Mapping
         {
             CreateMap<RegisterUserDto, User>();
             CreateMap<Movie, MovieResponseDto>();
+            CreateMap<CreateMovieDto, Movie>();
         }
     }
 }
