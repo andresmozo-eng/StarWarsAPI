@@ -88,7 +88,7 @@ namespace StarWarsAPI.API
                 {
                     Title = "StarWars API",
                     Version = "v1",
-                    Description = "API de gestión de películas de Star Wars"
+                    Description = "API de gestion de peliculas de Star Wars"
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

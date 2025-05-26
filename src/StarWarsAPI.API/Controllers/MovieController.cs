@@ -91,7 +91,15 @@ namespace StarWarsAPI.API.Controllers
             return Ok(movie);
         }
 
-
+        /// <summary>
+        /// Modifica una película en la base de datos.
+        /// </summary>
+        /// <param name="request">Los datos de la película a modificar.</param>
+        /// <returns>El id de la película modificada.</returns>
+        /// <response code="201">Película modificada exitosamente.</response>
+        /// <response code="400">Los datos proporcionados no son válidos.</response>
+        /// <response code="401">El usuario no está autenticado.</response>
+        /// <response code="403">El usuario no tiene permisos para modificar películas.</response>
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
