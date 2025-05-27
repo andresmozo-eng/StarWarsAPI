@@ -40,7 +40,7 @@ namespace StarWarsAPI.Application.Services
 
 
             _passwordHasher.CreatePasswordHash(dto.Password, out var hash, out var salt);
-            var user = new User(dto.UserName, dto.Email, hash, salt, (int)RoleType.Admin); //Created as user by default
+            var user = new User(dto.UserName, dto.Email, hash, salt, (int)RoleType.User); //Created as user by default
 
             await _userRepository.AddAsync(user);
             await _userRepository.SaveChangesAsync();
