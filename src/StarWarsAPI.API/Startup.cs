@@ -86,9 +86,9 @@ namespace StarWarsAPI.API
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "StarWars API",
+                    Title = "Movies API",
                     Version = "v1",
-                    Description = "API de gestion de peliculas de Star Wars"
+                    Description = "API de gestion de peliculas"
                 });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
