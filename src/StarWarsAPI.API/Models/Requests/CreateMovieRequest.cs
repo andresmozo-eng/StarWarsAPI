@@ -8,7 +8,7 @@ namespace StarWarsAPI.API.Models.Requests
         public string Director { get; set; }
         public string Producer { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public int EpisodeId { get; set; }
+        public int? EpisodeId { get; set; }
         public string OpeningCrawl { get; set; }
     }
 

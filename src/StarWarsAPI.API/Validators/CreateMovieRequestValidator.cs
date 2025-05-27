@@ -12,9 +12,6 @@ namespace StarWarsAPI.API.Validators
                 .NotEmpty().WithMessage("El título es obligatorio.")
                 .MaximumLength(200).WithMessage("El título no puede tener más de 200 caracteres.");
 
-            RuleFor(x => x.EpisodeId)
-                .GreaterThan(0).WithMessage("El ID del episodio debe ser mayor que 0.");
-
             RuleFor(x => x.OpeningCrawl)
                 .NotEmpty().WithMessage("El texto inicial es obligatorio.");
 
