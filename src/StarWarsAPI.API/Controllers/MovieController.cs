@@ -125,7 +125,5 @@ namespace StarWarsAPI.API.Controllers
             await _movieService.DeleteMovieAsync(id);
             return NoContent();
         }
-
-
     }
 }
